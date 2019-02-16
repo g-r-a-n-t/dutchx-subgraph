@@ -14,7 +14,7 @@ More information about the hackathon and competative bounties can be found here:
 
 ## Subgraph Usage
 
-The subgraph keeps track of auction scheduling and clearing. Using these events as the basis of the subgraph enables a rich set of useful queries. Some examples follow below:
+The subgraph keeps track of auction scheduling and clearing. Using these events as the basis of the subgraph enables some interesting queries. Examples follow below:
 
 ### Price History
 ```
@@ -35,7 +35,7 @@ The subgraph keeps track of auction scheduling and clearing. Using these events 
 ```
 *Retrieve historic value of Raiden in Wrapped Ether.*
 
-The query above will return the price attributes of `RDN 0x25...` relative to `WETH 0xc0...` from all `cleared` auctions. The result should look something like this:
+The query above will return the price of `RDN 0x25...` relative to `WETH 0xc0...` from all `cleared` auctions in descening order by `startTime`. The result should look something like this:
 
 ```
 {
@@ -59,7 +59,7 @@ The query above will return the price attributes of `RDN 0x25...` relative to `W
 }
 ```
 
-DutchX returns prices in terms of a `uint256` numerator and denominator, so you must divide `priceNum` by `priceDen` and multiply it by `USD/ETH` to get a human friendly value of `RDN`. Performing this calculation on the first result will yield `~$0.25`.
+DutchX returns prices in terms of `uint256` numerators and denominators, so you must divide `priceNum` by `priceDen` and multiply it by `USD/ETH` to get a human friendly value. Performing this calculation on the first result will yield $0.25.
 
 `11619822656640626064/5567148436390553526163 * 120 = .2504`
 
@@ -108,3 +108,7 @@ The above query will filter all auctions on `cleared` and return the tokens bein
   }
 }
 ```
+
+## Usefulness
+
+The GraphQL syntax is pretty staight-forward, which makes it easier for developers to incorporate information from DutchX than any other avaiable method (that I'm aware of). This combined with the speed offered by caching makes this subgraph an attractive solution to anybody looking to integrate their dapp with DutchX. 

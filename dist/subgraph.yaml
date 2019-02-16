@@ -5,25 +5,6 @@ schema:
   file: schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: Counter
-    network: mainnet
-    source:
-      address: '0xe8d7648dd6b3b8b4eb360009745fc0a3c597764b'
-      abi: Counter
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.1
-      language: wasm/assemblyscript
-      entities:
-        - Counter
-      abis:
-        - name: Counter
-          file: Counter/abis/Counter.abi
-      eventHandlers:
-        - event: Incremented(uint256)
-          handler: handleIncremented
-      file: Counter/Counter.wasm
-  - kind: ethereum/contract
     name: DutchExchange
     network: mainnet
     source:

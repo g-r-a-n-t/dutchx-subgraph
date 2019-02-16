@@ -63,3 +63,18 @@ Of course, Solidity can only return integers, so you must divide the `priceNum` 
 `11619822656640626064/5567148436390553526163 * 120 = .2504`
 
 ### Example #2
+```
+{
+  auctions (
+    where: {
+      cleared: false
+    }
+  ) {
+    sellToken
+    buyToken
+    auctionIndex
+    startTime
+  }
+}
+```
+*Retreive all open auctions. In this case, the only attribute being filtered is `cleared`. This will return a list of auctions that are currently in progress.*

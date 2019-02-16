@@ -110,4 +110,22 @@ export class Auction extends Entity {
   set cleared(value: boolean) {
     this.set("cleared", Value.fromBoolean(value));
   }
+
+  get startTime(): BigInt {
+    let value = this.get("startTime");
+    return value.toBigInt();
+  }
+
+  set startTime(value: BigInt) {
+    this.set("startTime", Value.fromBigInt(value));
+  }
+
+  get clearingTime(): BigInt {
+    let value = this.get("clearingTime");
+    return value.toBigInt();
+  }
+
+  set clearingTime(value: BigInt) {
+    this.set("clearingTime", Value.fromBigInt(value));
+  }
 }

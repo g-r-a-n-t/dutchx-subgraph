@@ -111,4 +111,17 @@ export class DutchExchange extends SmartContract {
       result[1].toBigInt()
     );
   }
+
+  getClearingTime(
+    token1: Address,
+    token2: Address,
+    auctionIndex: BigInt
+  ): BigInt {
+    let result = super.call("getClearingTime", [
+      EthereumValue.fromAddress(token1),
+      EthereumValue.fromAddress(token2),
+      EthereumValue.fromUnsignedBigInt(auctionIndex)
+    ]);
+    return result[0].toBigInt();
+  }
 }

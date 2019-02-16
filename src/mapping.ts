@@ -18,6 +18,7 @@ export function handleAuctionCleared(event: AuctionCleared): void {
     auction.sellToken = params.sellToken
     auction.buyToken = params.buyToken
     auction.auctionIndex = params.auctionIndex
+    auction.startTime = 0
   }
 
   // assign new values to the entity
@@ -26,6 +27,7 @@ export function handleAuctionCleared(event: AuctionCleared): void {
   auction.priceNum = price.value0
   auction.priceDen = price.value1
   auction.cleared = true
+  auction.clearingTime = dutchExchange.getClearingTime(params.sellToken, params.buyToken, params.auctionIndex)
   auction.save()
 }
 
@@ -44,6 +46,8 @@ export function handleAuctionStartScheduled(event: AuctionStartScheduled): void 
   auction.priceNum = 0
   auction.priceDen = 0
   auction.cleared = false
+  auction.startTime = params.auctionStart
+  auction.clearingTime = 0
   auction.save()
 }
 

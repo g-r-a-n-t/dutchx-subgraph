@@ -88,5 +88,32 @@
     "payable": false,
     "stateMutability": "view",
     "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "token1",
+        "type": "address"
+      },
+      {
+        "name": "token2",
+        "type": "address"
+      },
+      {
+        "name": "auctionIndex",
+        "type": "uint256"
+      }
+    ],
+    "name": "getClearingTime",
+    "outputs": [
+      {
+        "name": "time",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   }
 ]

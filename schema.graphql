@@ -8,4 +8,6 @@ type Auction @entity {
   priceNum: BigInt!
   priceDen: BigInt!
   cleared: Boolean!
+  startTime: BigInt!
+  clearingTime: BigInt!
 }

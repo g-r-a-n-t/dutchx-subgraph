@@ -90,22 +90,49 @@
       "payable": false,
       "stateMutability": "view",
       "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "token1",
+          "type": "address"
+        },
+        {
+          "name": "token2",
+          "type": "address"
+        },
+        {
+          "name": "auctionIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "getClearingTime",
+      "outputs": [
+        {
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
     }
   ],
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity ^0.5.0;\n\n// using a thin interface instead of importing the whole dx contract suite\ninterface DutchExchange {\n  function getPriceInPastAuction(address token1, address token2, uint auctionIndex) external view returns (uint num, uint den);\n\n  event AuctionCleared(\n      address indexed sellToken,\n      address indexed buyToken,\n      uint sellVolume,\n      uint buyVolume,\n      uint indexed auctionIndex\n  );\n\n  event AuctionStartScheduled(\n      address indexed sellToken,\n      address indexed buyToken,\n      uint indexed auctionIndex,\n      uint auctionStart\n  );\n}\n",
+  "source": "pragma solidity ^0.5.0;\n\n// using a thin interface instead of importing the whole dx contract suite\ninterface DutchExchange {\n  function getPriceInPastAuction(address token1, address token2, uint auctionIndex) external view returns (uint num, uint den);\n  function getClearingTime(address token1, address token2, uint auctionIndex) external view returns (uint time);\n\n  event AuctionCleared(\n      address indexed sellToken,\n      address indexed buyToken,\n      uint sellVolume,\n      uint buyVolume,\n      uint indexed auctionIndex\n  );\n\n  event AuctionStartScheduled(\n      address indexed sellToken,\n      address indexed buyToken,\n      uint indexed auctionIndex,\n      uint auctionStart\n  );\n}\n",
   "sourcePath": "/home/grant/workshop/dutchx-subgraph/contracts/DutchExchange.sol",
   "ast": {
     "absolutePath": "/home/grant/workshop/dutchx-subgraph/contracts/DutchExchange.sol",
     "exportedSymbols": {
       "DutchExchange": [
-        37
+        48
       ]
     },
-    "id": 38,
+    "id": 49,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -125,9 +152,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 37,
+        "id": 48,
         "linearizedBaseContracts": [
-          37
+          48
         ],
         "name": "DutchExchange",
         "nodeType": "ContractDefinition",
@@ -287,30 +314,32 @@
               ],
               "src": "232:20:0"
             },
-            "scope": 37,
+            "scope": 48,
             "src": "128:125:0",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           },
           {
-            "anonymous": false,
+            "body": null,
             "documentation": null,
-            "id": 26,
-            "name": "AuctionCleared",
-            "nodeType": "EventDefinition",
+            "id": 25,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getClearingTime",
+            "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 25,
+              "id": 21,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
                   "id": 16,
-                  "indexed": true,
-                  "name": "sellToken",
+                  "name": "token1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 26,
-                  "src": "285:25:0",
+                  "scope": 25,
+                  "src": "281:14:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -321,7 +350,7 @@
                     "id": 15,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "285:7:0",
+                    "src": "281:7:0",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -334,11 +363,10 @@
                 {
                   "constant": false,
                   "id": 18,
-                  "indexed": true,
-                  "name": "buyToken",
+                  "name": "token2",
                   "nodeType": "VariableDeclaration",
-                  "scope": 26,
-                  "src": "318:24:0",
+                  "scope": 25,
+                  "src": "297:14:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -349,7 +377,7 @@
                     "id": 17,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "318:7:0",
+                    "src": "297:7:0",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -362,11 +390,10 @@
                 {
                   "constant": false,
                   "id": 20,
-                  "indexed": false,
-                  "name": "sellVolume",
+                  "name": "auctionIndex",
                   "nodeType": "VariableDeclaration",
-                  "scope": 26,
-                  "src": "350:15:0",
+                  "scope": 25,
+                  "src": "313:17:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -377,61 +404,7 @@
                     "id": 19,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "350:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 22,
-                  "indexed": false,
-                  "name": "buyVolume",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 26,
-                  "src": "373:14:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 21,
-                    "name": "uint",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "373:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 24,
-                  "indexed": true,
-                  "name": "auctionIndex",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 26,
-                  "src": "395:25:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 23,
-                    "name": "uint",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "395:4:0",
+                    "src": "313:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -441,84 +414,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "277:147:0"
+              "src": "280:51:0"
             },
-            "src": "257:168:0"
-          },
-          {
-            "anonymous": false,
-            "documentation": null,
-            "id": 36,
-            "name": "AuctionStartScheduled",
-            "nodeType": "EventDefinition",
-            "parameters": {
-              "id": 35,
+            "returnParameters": {
+              "id": 24,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 28,
-                  "indexed": true,
-                  "name": "sellToken",
+                  "id": 23,
+                  "name": "time",
                   "nodeType": "VariableDeclaration",
-                  "scope": 36,
-                  "src": "464:25:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_address",
-                    "typeString": "address"
-                  },
-                  "typeName": {
-                    "id": 27,
-                    "name": "address",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "464:7:0",
-                    "stateMutability": "nonpayable",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 30,
-                  "indexed": true,
-                  "name": "buyToken",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 36,
-                  "src": "497:24:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_address",
-                    "typeString": "address"
-                  },
-                  "typeName": {
-                    "id": 29,
-                    "name": "address",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "497:7:0",
-                    "stateMutability": "nonpayable",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 32,
-                  "indexed": true,
-                  "name": "auctionIndex",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 36,
-                  "src": "529:25:0",
+                  "scope": 25,
+                  "src": "355:9:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -526,37 +434,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 31,
+                    "id": 22,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "529:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 34,
-                  "indexed": false,
-                  "name": "auctionStart",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 36,
-                  "src": "562:17:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 33,
-                    "name": "uint",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "562:4:0",
+                    "src": "355:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -566,25 +447,306 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "456:127:0"
+              "src": "354:11:0"
             },
-            "src": "429:155:0"
+            "scope": 48,
+            "src": "256:110:0",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 37,
+            "name": "AuctionCleared",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 36,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 27,
+                  "indexed": true,
+                  "name": "sellToken",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 37,
+                  "src": "398:25:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 26,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "398:7:0",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 29,
+                  "indexed": true,
+                  "name": "buyToken",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 37,
+                  "src": "431:24:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 28,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "431:7:0",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 31,
+                  "indexed": false,
+                  "name": "sellVolume",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 37,
+                  "src": "463:15:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 30,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "463:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 33,
+                  "indexed": false,
+                  "name": "buyVolume",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 37,
+                  "src": "486:14:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 32,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "486:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 35,
+                  "indexed": true,
+                  "name": "auctionIndex",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 37,
+                  "src": "508:25:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 34,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "508:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "390:147:0"
+            },
+            "src": "370:168:0"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 47,
+            "name": "AuctionStartScheduled",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 46,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 39,
+                  "indexed": true,
+                  "name": "sellToken",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47,
+                  "src": "577:25:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 38,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "577:7:0",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41,
+                  "indexed": true,
+                  "name": "buyToken",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47,
+                  "src": "610:24:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 40,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "610:7:0",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 43,
+                  "indexed": true,
+                  "name": "auctionIndex",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47,
+                  "src": "642:25:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 42,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "642:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 45,
+                  "indexed": false,
+                  "name": "auctionStart",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47,
+                  "src": "675:17:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 44,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "675:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "569:127:0"
+            },
+            "src": "542:155:0"
           }
         ],
-        "scope": 38,
-        "src": "100:486:0"
+        "scope": 49,
+        "src": "100:599:0"
       }
     ],
-    "src": "0:587:0"
+    "src": "0:700:0"
   },
   "legacyAST": {
     "absolutePath": "/home/grant/workshop/dutchx-subgraph/contracts/DutchExchange.sol",
     "exportedSymbols": {
       "DutchExchange": [
-        37
+        48
       ]
     },
-    "id": 38,
+    "id": 49,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -604,9 +766,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 37,
+        "id": 48,
         "linearizedBaseContracts": [
-          37
+          48
         ],
         "name": "DutchExchange",
         "nodeType": "ContractDefinition",
@@ -766,30 +928,32 @@
               ],
               "src": "232:20:0"
             },
-            "scope": 37,
+            "scope": 48,
             "src": "128:125:0",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           },
           {
-            "anonymous": false,
+            "body": null,
             "documentation": null,
-            "id": 26,
-            "name": "AuctionCleared",
-            "nodeType": "EventDefinition",
+            "id": 25,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getClearingTime",
+            "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 25,
+              "id": 21,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
                   "id": 16,
-                  "indexed": true,
-                  "name": "sellToken",
+                  "name": "token1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 26,
-                  "src": "285:25:0",
+                  "scope": 25,
+                  "src": "281:14:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -800,7 +964,7 @@
                     "id": 15,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "285:7:0",
+                    "src": "281:7:0",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -813,11 +977,10 @@
                 {
                   "constant": false,
                   "id": 18,
-                  "indexed": true,
-                  "name": "buyToken",
+                  "name": "token2",
                   "nodeType": "VariableDeclaration",
-                  "scope": 26,
-                  "src": "318:24:0",
+                  "scope": 25,
+                  "src": "297:14:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -828,7 +991,7 @@
                     "id": 17,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "318:7:0",
+                    "src": "297:7:0",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -841,11 +1004,10 @@
                 {
                   "constant": false,
                   "id": 20,
-                  "indexed": false,
-                  "name": "sellVolume",
+                  "name": "auctionIndex",
                   "nodeType": "VariableDeclaration",
-                  "scope": 26,
-                  "src": "350:15:0",
+                  "scope": 25,
+                  "src": "313:17:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -856,61 +1018,7 @@
                     "id": 19,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "350:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 22,
-                  "indexed": false,
-                  "name": "buyVolume",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 26,
-                  "src": "373:14:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 21,
-                    "name": "uint",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "373:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 24,
-                  "indexed": true,
-                  "name": "auctionIndex",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 26,
-                  "src": "395:25:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 23,
-                    "name": "uint",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "395:4:0",
+                    "src": "313:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -920,84 +1028,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "277:147:0"
+              "src": "280:51:0"
             },
-            "src": "257:168:0"
-          },
-          {
-            "anonymous": false,
-            "documentation": null,
-            "id": 36,
-            "name": "AuctionStartScheduled",
-            "nodeType": "EventDefinition",
-            "parameters": {
-              "id": 35,
+            "returnParameters": {
+              "id": 24,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 28,
-                  "indexed": true,
-                  "name": "sellToken",
+                  "id": 23,
+                  "name": "time",
                   "nodeType": "VariableDeclaration",
-                  "scope": 36,
-                  "src": "464:25:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_address",
-                    "typeString": "address"
-                  },
-                  "typeName": {
-                    "id": 27,
-                    "name": "address",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "464:7:0",
-                    "stateMutability": "nonpayable",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 30,
-                  "indexed": true,
-                  "name": "buyToken",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 36,
-                  "src": "497:24:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_address",
-                    "typeString": "address"
-                  },
-                  "typeName": {
-                    "id": 29,
-                    "name": "address",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "497:7:0",
-                    "stateMutability": "nonpayable",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 32,
-                  "indexed": true,
-                  "name": "auctionIndex",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 36,
-                  "src": "529:25:0",
+                  "scope": 25,
+                  "src": "355:9:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1005,37 +1048,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 31,
+                    "id": 22,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "529:4:0",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                },
-                {
-                  "constant": false,
-                  "id": 34,
-                  "indexed": false,
-                  "name": "auctionStart",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 36,
-                  "src": "562:17:0",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
-                  },
-                  "typeName": {
-                    "id": 33,
-                    "name": "uint",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "562:4:0",
+                    "src": "355:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1045,16 +1061,297 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "456:127:0"
+              "src": "354:11:0"
             },
-            "src": "429:155:0"
+            "scope": 48,
+            "src": "256:110:0",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 37,
+            "name": "AuctionCleared",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 36,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 27,
+                  "indexed": true,
+                  "name": "sellToken",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 37,
+                  "src": "398:25:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 26,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "398:7:0",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 29,
+                  "indexed": true,
+                  "name": "buyToken",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 37,
+                  "src": "431:24:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 28,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "431:7:0",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 31,
+                  "indexed": false,
+                  "name": "sellVolume",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 37,
+                  "src": "463:15:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 30,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "463:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 33,
+                  "indexed": false,
+                  "name": "buyVolume",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 37,
+                  "src": "486:14:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 32,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "486:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 35,
+                  "indexed": true,
+                  "name": "auctionIndex",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 37,
+                  "src": "508:25:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 34,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "508:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "390:147:0"
+            },
+            "src": "370:168:0"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 47,
+            "name": "AuctionStartScheduled",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 46,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 39,
+                  "indexed": true,
+                  "name": "sellToken",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47,
+                  "src": "577:25:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 38,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "577:7:0",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 41,
+                  "indexed": true,
+                  "name": "buyToken",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47,
+                  "src": "610:24:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 40,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "610:7:0",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 43,
+                  "indexed": true,
+                  "name": "auctionIndex",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47,
+                  "src": "642:25:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 42,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "642:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 45,
+                  "indexed": false,
+                  "name": "auctionStart",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47,
+                  "src": "675:17:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 44,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "675:4:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "569:127:0"
+            },
+            "src": "542:155:0"
           }
         ],
-        "scope": 38,
-        "src": "100:486:0"
+        "scope": 49,
+        "src": "100:599:0"
       }
     ],
-    "src": "0:587:0"
+    "src": "0:700:0"
   },
   "compiler": {
     "name": "solc",
@@ -1062,7 +1359,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-02-16T17:53:19.093Z",
+  "updatedAt": "2019-02-16T18:34:41.597Z",
   "devdoc": {
     "methods": {}
   },

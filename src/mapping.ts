@@ -30,7 +30,7 @@ export function handleAuctionCleared(event: AuctionCleared): void {
 }
 
 
-export function handleAuctionStartScheduled(event: AuctionCleared): void {
+export function handleAuctionStartScheduled(event: AuctionStartScheduled): void {
   // for ease of use
   let params = event.params
 

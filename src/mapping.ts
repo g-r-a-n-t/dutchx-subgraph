@@ -1,4 +1,4 @@
-import { AuctionCleared, DutchExchange } from './types/DutchExchange/DutchExchange'
+import { AuctionCleared, AuctionStartScheduled, DutchExchange } from './types/DutchExchange/DutchExchange'
 import { Auction } from './types/schema'
 import { Address, BigInt } from "@graphprotocol/graph-ts";
 

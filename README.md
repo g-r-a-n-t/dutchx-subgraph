@@ -6,7 +6,7 @@ This is a hackathon project built on top of [The Graph](https://thegraph.com/) p
 
 Subgraph explorer: https://thegraph.com/explorer/subgraph/g-r-a-n-t/dutchx
 
-More information about the hackathon and competative bounties can be found here:
+More information about the hackathon and competitive bounties can be found here:
 
 - https://www.ethdenver.com/
 - https://kauri.io/article/4d7af74855534454a5d57ca98ab8432a/v1/the-graph-sponsor-bounty-at-ethdenver-2019 (under bounty #2)
@@ -35,7 +35,7 @@ The subgraph keeps track of auction scheduling and clearing. Using these events 
 ```
 *Retrieve historic value of Raiden in Wrapped Ether.*
 
-The query above will return the price of `RDN 0x25...` relative to `WETH 0xc0...` from all `cleared` auctions in descening order by `startTime`. The result should look something like this:
+The query above will return the price of `RDN 0x25...` relative to `WETH 0xc0...` from all `cleared` auctions in descending order by `startTime`. The result should look something like this:
 
 ```
 {
@@ -111,4 +111,4 @@ The above query will filter all auctions on `cleared` and return the tokens bein
 
 ## Usefulness
 
-The GraphQL syntax is pretty staight-forward, which makes it easier for developers to incorporate information from DutchX than any other avaiable method (that I'm aware of). This combined with the speed offered by caching makes this subgraph an attractive solution to anybody looking to integrate their dapp with DutchX. 
+The GraphQL syntax is pretty straight-forward, which makes it easier for developers to incorporate information from DutchX into their dapp than any other available method (that I'm aware of). This combined with the speed offered by caching makes this subgraph an attractive solution to anybody looking to retrieve data from DutchX.

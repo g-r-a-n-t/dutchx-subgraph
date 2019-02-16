@@ -22,4 +22,6 @@ dataSources:
       eventHandlers:
         - event: AuctionCleared(address,address,uint256,uint256,uint256)
           handler: handleAuctionCleared
+        - event: AuctionStartScheduled(address,address,uint256,uint256)
+          handler: handleAuctionStartScheduled
       file: ./src/mapping.ts

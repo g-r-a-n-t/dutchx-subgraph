@@ -44,6 +44,36 @@ export class AuctionClearedParams {
   }
 }
 
+export class AuctionStartScheduled extends EthereumEvent {
+  get params(): AuctionStartScheduledParams {
+    return new AuctionStartScheduledParams(this);
+  }
+}
+
+export class AuctionStartScheduledParams {
+  _event: AuctionStartScheduled;
+
+  constructor(event: AuctionStartScheduled) {
+    this._event = event;
+  }
+
+  get sellToken(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get buyToken(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get auctionIndex(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+
+  get auctionStart(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+}
+
 export class DutchExchange__getPriceInPastAuctionResult {
   value0: BigInt;
   value1: BigInt;

@@ -101,4 +101,13 @@ export class Auction extends Entity {
   set priceDen(value: BigInt) {
     this.set("priceDen", Value.fromBigInt(value));
   }
+
+  get cleared(): boolean {
+    let value = this.get("cleared");
+    return value.toBoolean();
+  }
+
+  set cleared(value: boolean) {
+    this.set("cleared", Value.fromBoolean(value));
+  }
 }

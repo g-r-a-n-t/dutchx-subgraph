@@ -32,6 +32,33 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "sellToken",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "buyToken",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "auctionIndex",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "auctionStart",
+        "type": "uint256"
+      }
+    ],
+    "name": "AuctionStartScheduled",
+    "type": "event"
+  },
+  {
     "constant": true,
     "inputs": [
       {

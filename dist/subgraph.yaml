@@ -1,5 +1,5 @@
 specVersion: 0.0.1
-description: A simple counter
+description: DutchX Subgraph
 repository: 'https://github.com/g-r-a-n-t/dutchx-subgraph'
 schema:
   file: schema.graphql

@@ -9,3 +9,12 @@ export function handleIncremented(event: Incremented): void {
   counter.value = event.params.value
   counter.save()
 }
+
+export function handleAuctionCleared(event: AuctionCleared): void {
+  let counter = Counter.load('default-counter')
+  if (counter == null) {
+    counter = new Counter('default-counter')
+  }
+  counter.value = event.params.value
+  counter.save()
+}

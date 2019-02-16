@@ -23,3 +23,22 @@ dataSources:
         - event: Incremented(uint256)
           handler: handleIncremented
       file: ./src/mapping.ts
+  - kind: ethereum/contract
+    name: DutchExchange
+    network: mainnet
+    source:
+      address: '0xb9812e2fa995ec53b5b6df34d21f9304762c5497'
+      abi: DutchExchange
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.1
+      language: wasm/assemblyscript
+      entities:
+        - AuctionCleared
+      abis:
+        - name: DutchExchange
+          file: ./abis/DutchExchange.json
+      eventHandlers:
+        - event: AuctionCleared(address,address,uint256,uint256,uint256)
+          handler: handleAuctionCleared
+      file: ./src/mapping.ts

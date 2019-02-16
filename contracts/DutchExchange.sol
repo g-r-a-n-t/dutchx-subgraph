@@ -1,6 +1,15 @@
-pragma solidity ^0.5.2;
+pragma solidity ^0.5.0;
 
-// a simple interface containing only the functions that we are interested in.
 interface DutchExchange {
   function getPriceOfTokenInLastAuction(address token) external view returns (uint num, uint den);
+
+  event AuctionCleared(
+      address indexed sellToken,
+      address indexed buyToken,
+      uint sellVolume,
+      uint buyVolume,
+      uint indexed auctionIndex
+  );
 }
+
+

@@ -2,3 +2,12 @@ type Counter @entity {
   id: ID!
   value: BigInt!
 }
+
+type AuctionCleared @entity {
+  id: ID!
+  sellToken: Bytes!
+  buyToken: Bytes!
+  sellVolume: BigInt!
+  buyVolume: BigInt!
+  auctionIndex: BigInt!
+}

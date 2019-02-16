@@ -4,4 +4,5 @@ type Auction @entity {
   buyToken: Bytes!
   sellVolume: BigInt!
   buyVolume: BigInt!
+  auctionIndex: BigInt!
 }

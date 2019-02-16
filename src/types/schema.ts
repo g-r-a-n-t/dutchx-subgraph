@@ -74,4 +74,13 @@ export class Auction extends Entity {
   set buyVolume(value: BigInt) {
     this.set("buyVolume", Value.fromBigInt(value));
   }
+
+  get auctionIndex(): BigInt {
+    let value = this.get("auctionIndex");
+    return value.toBigInt();
+  }
+
+  set auctionIndex(value: BigInt) {
+    this.set("auctionIndex", Value.fromBigInt(value));
+  }
 }

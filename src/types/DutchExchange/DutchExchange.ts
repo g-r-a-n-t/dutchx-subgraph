@@ -44,7 +44,7 @@ export class AuctionClearedParams {
   }
 }
 
-export class DutchExchange__getPriceOfTokenInLastAuctionResult {
+export class DutchExchange__getPriceInPastAuctionResult {
   value0: BigInt;
   value1: BigInt;
 
@@ -66,13 +66,17 @@ export class DutchExchange extends SmartContract {
     return new DutchExchange("DutchExchange", address);
   }
 
-  getPriceOfTokenInLastAuction(
-    token: Address
-  ): DutchExchange__getPriceOfTokenInLastAuctionResult {
-    let result = super.call("getPriceOfTokenInLastAuction", [
-      EthereumValue.fromAddress(token)
+  getPriceInPastAuction(
+    token1: Address,
+    token2: Address,
+    auctionIndex: BigInt
+  ): DutchExchange__getPriceInPastAuctionResult {
+    let result = super.call("getPriceInPastAuction", [
+      EthereumValue.fromAddress(token1),
+      EthereumValue.fromAddress(token2),
+      EthereumValue.fromUnsignedBigInt(auctionIndex)
     ]);
-    return new DutchExchange__getPriceOfTokenInLastAuctionResult(
+    return new DutchExchange__getPriceInPastAuctionResult(
       result[0].toBigInt(),
       result[1].toBigInt()
     );

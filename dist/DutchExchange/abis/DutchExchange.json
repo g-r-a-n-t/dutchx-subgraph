@@ -35,11 +35,19 @@
     "constant": true,
     "inputs": [
       {
-        "name": "token",
+        "name": "token1",
         "type": "address"
+      },
+      {
+        "name": "token2",
+        "type": "address"
+      },
+      {
+        "name": "auctionIndex",
+        "type": "uint256"
       }
     ],
-    "name": "getPriceOfTokenInLastAuction",
+    "name": "getPriceInPastAuction",
     "outputs": [
       {
         "name": "num",

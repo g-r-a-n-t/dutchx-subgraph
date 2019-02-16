@@ -13,9 +13,10 @@ More information about the hackathon and competative bounties can be found here:
 - https://gitcoin.co/issue/GnosisEcosystemFund/Gnosis-Bounties-/7/2361
 
 ## Subgraph Usage
-The subgraph keeps track of auction scheduling and clearing. Using these events as the basis of the subgraph allows for a rich set of useful queries. Some examples follow below:
 
-### Example #1
+The subgraph keeps track of auction scheduling and clearing. Using these events as the basis of the subgraph enables a rich set of useful queries. Some examples follow below:
+
+### Price History
 ```
 {
   auctions (
@@ -32,9 +33,9 @@ The subgraph keeps track of auction scheduling and clearing. Using these events 
   }
 }
 ```
-*Retrieve historic value of Raiden (`RDN`) to Wrapped Ether (`WETH`). In this case, all auctions are filtered against the `RDN` and `WETH` contract addess, which are set inside of the `where` clause.*
+*Retrieve historic value of Raiden in Wrapped Ether.*
 
-The query shown above will return the price attributes of `RDN` relative to `WETH` from all `cleared` auctions. It should look something like this:
+The query above will return the price attributes of `RDN 0x25...` relative to `WETH 0xc0...` from all `cleared` auctions. The result should look something like this:
 
 ```
 {
@@ -58,11 +59,11 @@ The query shown above will return the price attributes of `RDN` relative to `WET
 }
 ```
 
-Of course, Solidity can only return integers, so you must divide the `priceNum` by `priceDen` to get a human friendly value of `RDN` and multiply it by `USD/ETH`. Performing this calculation on the first result above yields `~$0.25`.
+DutchX returns prices in terms of a `uint256` numerator and denominator, so you must divide `priceNum` by `priceDen` and multiply it by `USD/ETH` to get a human friendly value of `RDN`. Performing this calculation on the first result will yield `~$0.25`.
 
 `11619822656640626064/5567148436390553526163 * 120 = .2504`
 
-### Example #2
+### Open Auctions
 ```
 {
   auctions (
@@ -77,4 +78,33 @@ Of course, Solidity can only return integers, so you must divide the `priceNum` 
   }
 }
 ```
-*Retreive all open auctions. In this case, the only attribute being filtered is `cleared`. This will return a list of auctions that are currently in progress.*
+*Retreive all open auctions.*
+
+The above query will filter all auctions on `cleared` and return the tokens being exchanged along with their index and start time. The `cleared` attribute indicates whether or not the auction is still open. The result should look something like this:
+```
+{
+  "data": {
+    "auctions": [
+      {
+        "auctionIndex": "1",
+        "buyToken": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "sellToken": "0x255aa6df07540cb5d3d297f0d0d4d84cb52bc8e6",
+        "startTime": "1549667770"
+      },
+      {
+        "auctionIndex": "30",
+        "buyToken": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "sellToken": "0x255aa6df07540cb5d3d297f0d0d4d84cb52bc8e6",
+        "startTime": "1550354870"
+      },
+      {
+        "auctionIndex": "1",
+        "buyToken": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+        "sellToken": "0x543ff227f64aa17ea132bf9886cab5db55dcaddf",
+        "startTime": "1550168112"
+      }
+      ...
+    ]
+  }
+}
+```

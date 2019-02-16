@@ -34,7 +34,7 @@ dataSources:
       apiVersion: 0.0.1
       language: wasm/assemblyscript
       entities:
-        - AuctionCleared
+        - Auction
       abis:
         - name: DutchExchange
           file: ./abis/DutchExchange.json

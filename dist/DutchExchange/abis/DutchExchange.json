@@ -1,0 +1,57 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "sellToken",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "buyToken",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "sellVolume",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "buyVolume",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "auctionIndex",
+        "type": "uint256"
+      }
+    ],
+    "name": "AuctionCleared",
+    "type": "event"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address"
+      }
+    ],
+    "name": "getPriceOfTokenInLastAuction",
+    "outputs": [
+      {
+        "name": "num",
+        "type": "uint256"
+      },
+      {
+        "name": "den",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

@@ -49,7 +49,7 @@ export class Counter extends Entity {
   }
 }
 
-export class AuctionCleared extends Entity {
+export class Auction extends Entity {
   constructor(id: string) {
     this.entries = new Array(0);
     this.set("id", Value.fromString(id));
@@ -57,17 +57,17 @@ export class AuctionCleared extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save AuctionCleared entity without an ID");
+    assert(id !== null, "Cannot save Auction entity without an ID");
     assert(
       id.kind == ValueKind.STRING,
-      "Cannot save AuctionCleared entity with non-string ID. " +
+      "Cannot save Auction entity with non-string ID. " +
         'Considering using .toHex() to convert the "id" to a string.'
     );
-    store.set("AuctionCleared", id.toString(), this);
+    store.set("Auction", id.toString(), this);
   }
 
-  static load(id: string): AuctionCleared | null {
-    return store.get("AuctionCleared", id) as AuctionCleared | null;
+  static load(id: string): Auction | null {
+    return store.get("Auction", id) as Auction | null;
   }
 
   get id(): string {
@@ -113,14 +113,5 @@ export class AuctionCleared extends Entity {
 
   set buyVolume(value: BigInt) {
     this.set("buyVolume", Value.fromBigInt(value));
-  }
-
-  get auctionIndex(): BigInt {
-    let value = this.get("auctionIndex");
-    return value.toBigInt();
-  }
-
-  set auctionIndex(value: BigInt) {
-    this.set("auctionIndex", Value.fromBigInt(value));
   }
 }
